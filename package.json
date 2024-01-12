@@ -1,0 +1,19 @@
+{
+  "name": "bun-test",
+  "module": "index.ts",
+  "type": "module",
+  "devDependencies": {
+    "@types/bun": "^1.0.1",
+    "@types/figlet": "^1.5.8"
+  },
+  "scripts": {
+    "start": "bun --watch index.ts",
+    "build": "bun build ./index.ts --outdir ./build"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "figlet": "^1.7.0"
+  }
+}
