@@ -1,15 +1,16 @@
-import { PrismaClient } from "@prisma/client"
+import type { PrismaClient } from '@prisma/client';
+import prisma from '../database/prisma'
 
 export default class CreatePessoaService {
-    private static prisma: PrismaClient
+    private db: PrismaClient
 
     constructor() {
-        this.prisma = new PrismaClient()
+        this.db = prisma
     }
 
     public execute(data: any) {
         try {
-            const pessoaPersisted = this.prisma.pessoa.create({ data })
+            const pessoaPersisted = this.db.pessoa.create({ data })
 
             return pessoaPersisted;
         } catch (err) {

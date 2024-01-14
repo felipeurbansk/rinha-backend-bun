@@ -12,7 +12,7 @@
     "start": "bun --watch ./src/index.ts",
     "make": "bun build ./src/index.ts --outdir ./dist",
     "production": "bun run ./dist/index.js",
-    "prisma-migrate": "bunx prisma migrate dev"
+    "migrate": "bunx prisma migrate dev"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"

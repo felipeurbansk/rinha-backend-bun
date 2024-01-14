@@ -8,10 +8,10 @@ services:
     depends_on:
       - db
     expose:
-      - "80"
+      - "8080"
     restart: on-failure
     environment:
-      DATABASE_URL: "postgresql://rinha:rinhabackend@db:5432/rinha-backend?schema=public"
+      DATABASE_URL: "postgresql://rinha:rinhabackend@db:5432/rinha-backend?schema=public&connection_limit=20"
     deploy:
       resources:
         limits:
@@ -25,10 +25,10 @@ services:
     depends_on:
       - db
     expose:
-      - "80"
+      - "8080"
     restart: on-failure
     environment:
-      DATABASE_URL: "postgresql://rinha:rinhabackend@db:5432/rinha-backend?schema=public"
+      DATABASE_URL: "postgresql://rinha:rinhabackend@db:5432/rinha-backend?schema=public&connection_limit=20"
     deploy:
       resources:
         limits:
@@ -66,7 +66,3 @@ services:
       - 5432:5432
     expose:
       - "5432"
-
-networks:
-  default:
-    driver: bridge

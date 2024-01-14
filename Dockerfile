@@ -34,6 +34,6 @@ COPY . .
 
 # run the app
 USER bun
-EXPOSE 80/tcp
+EXPOSE 8080/tcp
 RUN ["bunx", "prisma", "migrate", "dev"]
 ENTRYPOINT [ "bun", "run", "start" ]

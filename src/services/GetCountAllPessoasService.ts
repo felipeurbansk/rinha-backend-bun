@@ -1,17 +1,16 @@
-import { PrismaClient } from "@prisma/client"
+import type { PrismaClient } from '@prisma/client';
+import prisma from '../database/prisma'
 
 export default class GetCountAllPessoasService {
-    private static prisma: PrismaClient
+    private db: PrismaClient
 
     constructor() {
-        if(!this.prisma) {
-            this.prisma = new PrismaClient()
-        }
+        this.db = prisma
     }
 
     public async execute() {
         try {
-            const countPessoas = await this.prisma.pessoa.count();
+            const countPessoas = await this.db.pessoa.count();
 
             return countPessoas
         } catch (err) {

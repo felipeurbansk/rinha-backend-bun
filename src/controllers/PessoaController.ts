@@ -8,7 +8,9 @@ import GetCountAllPessoasService from "../services/GetCountAllPessoasService"
 export default class PessoaController {
 
     public async create(req: Request, res: Response) {
-        const { apelido, nome, nascimento, stack } : Pessoa = req.body
+        const { apelido, nome, nascimento } : Pessoa = req.body
+        
+        let { stack } : Pessoa = req.body
 
         if( !apelido || !nome || !nascimento ) {
             return res.status(422).send()
@@ -18,7 +20,9 @@ export default class PessoaController {
             return res.status(400).send()
         }
 
-        if(stack) {
+        if(stack === null) stack = [""]
+
+        if(stack && stack.length > 0) {
             stack.map(s => typeof s !== 'string' ? res.status(400).send() : true)
         }
 
@@ -28,9 +32,11 @@ export default class PessoaController {
 
             return res.status(201).header('Location', `/pessoas/${pessoaPersisted.id}`).json(pessoaPersisted)
         } catch(err: any) {
-            if(err.code === "P2002") return res.status(422).send()
+            if(err.code === "P2002" || err.code === "P2000") return res.status(422).send()
 
-            return res.status(500).json({ err })
+            console.log({ err })
+
+            return res.status(400).json({ err })
         }
 
     }
@@ -48,7 +54,7 @@ export default class PessoaController {
 
             return res.status(200).json(pessoaPersisted)
         }   catch(err) {
-            return res.status(500).json({ err })
+            return res.status(400).json({ err })
         }
     }
 
@@ -56,7 +62,7 @@ export default class PessoaController {
         const { t } = req.query;
         let where = {}
 
-        if(t === '') return res.status(400).send();
+        if(!t || t === '') return res.status(400).send();
 
         where = {
             OR: [
@@ -85,7 +91,7 @@ export default class PessoaController {
     
             return res.status(200).json(pessoasPersisted);
         } catch(err) {
-            return res.status(500).json({ err })
+            return res.status(400).json({ err })
         }
     }
 
@@ -99,7 +105,7 @@ export default class PessoaController {
                     .status(200)
                     .send(String(countPessoas));
         } catch(err) {
-            return res.status(500).json({ err })
+            return res.status(400).json({ err })
         }
     }
 }

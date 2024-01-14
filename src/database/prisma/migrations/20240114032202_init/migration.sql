@@ -4,7 +4,7 @@ CREATE TABLE "Pessoa" (
     "apelido" VARCHAR(32) NOT NULL,
     "nome" VARCHAR(100) NOT NULL,
     "nascimento" VARCHAR(10) NOT NULL,
-    "stack" TEXT[] DEFAULT ARRAY[]::TEXT[],
+    "stack" TEXT[] DEFAULT ARRAY['']::TEXT[],
 
     CONSTRAINT "Pessoa_pkey" PRIMARY KEY ("id")
 );

@@ -3,7 +3,7 @@ import PessoaController from "./controllers/PessoaController"
 
 const app = express()
 app.use(json())
-const port = 80
+const port = 8080
 
 const pessoaController = new PessoaController()
 

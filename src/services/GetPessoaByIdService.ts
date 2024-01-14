@@ -1,17 +1,16 @@
-import { PrismaClient } from "@prisma/client"
+import type { PrismaClient } from '@prisma/client'
+import prisma from '../database/prisma'
 
 export default class GetPessoaByIdService {
-    private static prisma: PrismaClient
+    private db: PrismaClient
 
     constructor() {
-        if(!this.prisma) {
-            this.prisma = new PrismaClient()
-        }
+        this.db = prisma
     }
 
     public async execute(id: string) {
         try {
-            const pessoaPersisted = await this.prisma.pessoa.findUnique({
+            const pessoaPersisted = await this.db.pessoa.findUnique({
                 where: {
                     id
                 }

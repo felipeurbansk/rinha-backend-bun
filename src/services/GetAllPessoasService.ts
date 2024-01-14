@@ -1,17 +1,16 @@
-import { PrismaClient } from "@prisma/client"
+import type { PrismaClient } from '@prisma/client'
+import prisma from '../database/prisma'
 
 export default class GetAllPessoasService {
-    private static prisma: PrismaClient
+    private db: PrismaClient
 
     constructor() {
-        if(!this.prisma) {
-            this.prisma = new PrismaClient()
-        }
+        this.db = prisma
     }
 
     public async execute(where: any) {
         try {
-            const pessoasPersisted = await this.prisma.pessoa.findMany({ 
+            const pessoasPersisted = await this.db.pessoa.findMany({ 
                 where,
                 take: 50
              })

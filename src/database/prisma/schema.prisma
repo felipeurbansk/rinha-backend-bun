@@ -16,5 +16,5 @@ model Pessoa {
   apelido     String @db.VarChar(32) @unique
   nome        String @db.VarChar(100)
   nascimento  String @db.VarChar(10)
-  stack       String[] @default([])
+  stack       String[] @default([""])
 }
