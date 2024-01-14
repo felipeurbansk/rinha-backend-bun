@@ -27,12 +27,13 @@ COPY . .
 # RUN bun run build
 
 # copy production dependencies and source code into final image
-FROM base AS release
-COPY --from=install /temp/prod/node_modules node_modules
-COPY --from=prerelease /usr/src/app/index.ts .
-COPY --from=prerelease /usr/src/app/package.json .
+# FROM base AS release
+# COPY --from=install /temp/prod/node_modules node_modules
+# COPY --from=prerelease /usr/src/app/src/index.ts .
+# COPY --from=prerelease /usr/src/app/package.json .
 
 # run the app
 USER bun
 EXPOSE 80/tcp
-ENTRYPOINT [ "bun", "run", "--watch", "index.ts" ]
+RUN ["bunx", "prisma", "migrate", "dev"]
+ENTRYPOINT [ "bun", "run", "start" ]
