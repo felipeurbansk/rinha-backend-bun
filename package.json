@@ -4,16 +4,20 @@
   "type": "module",
   "devDependencies": {
     "@types/bun": "^1.0.1",
-    "@types/figlet": "^1.5.8"
+    "prisma": "^5.8.0"
   },
   "scripts": {
-    "start": "bun --watch index.ts",
-    "build": "bun build ./index.ts --outdir ./build"
+    "production": "bun run ./dist/index.js",
+    "prisma-migrate": "bunx prisma migrate dev"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
   },
+  "prisma": {
+    "schema": "src/database/prisma/schema.prisma"
+  },
   "dependencies": {
+    "@prisma/client": "^5.8.0",
     "figlet": "^1.7.0"
   }
 }

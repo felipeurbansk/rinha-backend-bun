@@ -1,0 +1,20 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  binaryTargets = ["native", "debian-openssl-1.1.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Pessoa {
+  id          String @id @default(uuid())
+  apelido     String @db.VarChar(32) @unique
+  nome        String @db.VarChar(100)
+  nascimento  String @db.VarChar(10)
+  stack       String[] @default([])
+}
